@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64633110278",
+    "project_id": "listndb",
+    "storage_bucket": "listndb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64633110278:android:6c896b16a93fca40dd2887",
+        "android_client_info": {
+          "package_name": "com.example.musiclovers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64633110278-890v6mqeeev9gvi1ls2vrns8k1l4r0hi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKZ6XLls47MOjwATFEVejdFM2vL2jqF5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64633110278-890v6mqeeev9gvi1ls2vrns8k1l4r0hi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
