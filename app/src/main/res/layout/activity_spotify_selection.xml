@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SpotifySelectionActivity">
+
+    <include layout="@layout/fragment_spotify_selection" />
+
+    <TextView
+        android:id="@+id/Select_dialog"
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="173dp"
+        android:layout_marginEnd="181dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="Select what you would like to post"
+        android:translationX="-0.3in"
+        android:translationY="3in" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
