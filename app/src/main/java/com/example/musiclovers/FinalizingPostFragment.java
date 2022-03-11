@@ -65,7 +65,7 @@ public class FinalizingPostFragment extends Fragment{
             public void onClick(View view) {
                 //Must change the .nagigate to different fragments. needs to be a different id
                 NavHostFragment.findNavController(FinalizingPostFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_FinalizingPost_to_Main);
             }
         });
     }
