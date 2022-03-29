@@ -1,5 +1,6 @@
 package com.example.musiclovers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ public class PostSelectionFragment extends Fragment {
 
     private FragmentPostSelectionBinding binding;
     private String TAG = "PostSelectionFragment";
+    // private final Intent SpotifySelectionIntent = new Intent(String.valueOf(R.id.action_PostSelection_to_SpotifySelection));
 
     @Override
     public View onCreateView(
@@ -63,7 +65,7 @@ public class PostSelectionFragment extends Fragment {
             public void onClick(View view) {
                 //Must change the .nagigate to different fragments
                 NavHostFragment.findNavController(PostSelectionFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_PostSelection_to_SpotifySelection);
             }
         });
     }

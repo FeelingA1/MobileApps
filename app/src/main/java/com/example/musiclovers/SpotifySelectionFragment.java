@@ -63,7 +63,7 @@ public class SpotifySelectionFragment extends Fragment{
             public void onClick(View view) {
                 //Must change the .nagigate to different fragments. needs to be a different id
                 NavHostFragment.findNavController(SpotifySelectionFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_SpotifySelection_to_FinalizingPost);
             }
         });
     }

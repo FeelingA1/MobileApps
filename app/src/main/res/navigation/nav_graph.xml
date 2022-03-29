@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_PostSelectionFragment"
+            app:destination="@id/PostSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +23,39 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PostSelectionFragment"
+        android:name="com.example.musiclovers.PostSelectionFragment"
+        android:label="Post Selection"
+        tools:layout="@layout/fragment_post_selection">
+
+        <action
+            android:id="@+id/action_PostSelection_to_SpotifySelection"
+            app:destination="@id/SpotifySelectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SpotifySelectionFragment"
+        android:name="com.example.musiclovers.SpotifySelectionFragment"
+        android:label="Spotify Selection"
+        tools:layout="@layout/fragment_spotify_selection">
+
+        <action
+            android:id="@+id/action_SpotifySelection_to_FinalizingPost"
+            app:destination="@id/FinalizingPostFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FinalizingPostFragment"
+        android:name="com.example.musiclovers.FinalizingPostFragment"
+        android:label="Finalizing Post"
+        tools:layout="@layout/fragment_finalizing_post">
+
+        <action
+            android:id="@+id/action_FinalizingPost_to_Main"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
