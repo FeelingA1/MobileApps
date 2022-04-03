@@ -12,10 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.spotify.android.appremote.api.ConnectionParams;
+import com.spotify.android.appremote.api.Connector;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
+
+import com.spotify.protocol.client.Subscription;
+import com.spotify.protocol.types.PlayerState;
+import com.spotify.protocol.types.Track;
+
 public class SpotifySelectionFragment extends Fragment{
 
     private FragmentSpotifySelectionBinding binding;
     private String TAG = "PostSelectionFragment";
+
+    private static final String CLIENT_ID = "b84eb155c69f4b2f96950e863ecc7895";
+    private static final String REDIRECT_URI = "http://localhost:8080";
+    private SpotifyAppRemote mSpotifyAppRemote;
+
 
     @Override
     public View onCreateView(
@@ -28,9 +41,55 @@ public class SpotifySelectionFragment extends Fragment{
 
     }
 
+    private void connected() {
+        // Play a playlist
+        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
+
+        // Subscribe to PlayerState
+        mSpotifyAppRemote.getPlayerApi()
+                .subscribeToPlayerState()
+                .setEventCallback(playerState -> {
+                    final Track track = playerState.track;
+                    if (track != null) {
+                        Log.d("SpotifySelectiddd", track.name + " by " + track.artist.name);
+                    }
+                });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        ConnectionParams connectionParams =
+                new ConnectionParams.Builder(CLIENT_ID)
+                        .setRedirectUri(REDIRECT_URI)
+                        .showAuthView(true)
+                        .build();
+
+        SpotifyAppRemote.connect(getActivity(), connectionParams,
+                new Connector.ConnectionListener() {
+
+                    @Override
+                    public void onConnected(SpotifyAppRemote spotifyAppRemote) {
+                        mSpotifyAppRemote = spotifyAppRemote;
+                        Log.d("SpotifySelection", "Connected! Yay!");
+
+                        // Now you can start interacting with App Remote
+                        connected();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Log.e("SpotifySelection", throwable.getMessage(), throwable);
+
+                        // Something went wrong when attempting to connect! Handle errors here
+                    }
+                });
         Log.d(TAG, "onResume");
     }
 
@@ -43,6 +102,7 @@ public class SpotifySelectionFragment extends Fragment{
     @Override
     public void onStop() {
         super.onStop();
+        SpotifyAppRemote.disconnect(mSpotifyAppRemote);
         Log.d(TAG, "onStop");
     }
 
