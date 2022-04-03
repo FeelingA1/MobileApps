@@ -20,10 +20,11 @@
         android:id="@+id/button_song"
         android:layout_width="393dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginBottom="612dp"
         android:text="@string/song"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
