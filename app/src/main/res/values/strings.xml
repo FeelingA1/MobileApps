@@ -12,4 +12,8 @@
     <string name="post">post</string>
     <string name="text">text</string>
     <string name="submit_post">submit_post</string>
+    <string name="song">song</string>
+    <string name="album">album</string>
+    <string name="playlist">playlist</string>
+    <string name="Post">Post</string>
 </resources>
