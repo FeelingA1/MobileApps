@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 public class FinalizingPostFragment extends Fragment{
 
-
+    //Thought this would get us to the next fragment, but maybe not right. Might want activity
     private FragmentFinalizingPostBinding binding;
     private String TAG = "FinalizingPostFragment";
 
