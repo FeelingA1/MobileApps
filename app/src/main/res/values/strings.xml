@@ -16,4 +16,5 @@
     <string name="album">album</string>
     <string name="playlist">playlist</string>
     <string name="Post">Post</string>
+    <string name="Menu">Menu</string>
 </resources>
