@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.musiclovers.databinding.FragmentFirstBinding;
+import com.example.musiclovers.databinding.FragmentMenuBinding;
 
-public class FirstFragment extends Fragment {
+public class MenuFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
-    private String TAG = "FirstFragment";
+    private FragmentMenuBinding binding;
+    private String TAG = "MenuFragment";
 
     @Override
     public View onCreateView(
@@ -23,7 +23,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         Log.d(TAG, "onCreateView");
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentMenuBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -58,7 +58,7 @@ public class FirstFragment extends Fragment {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(MenuFragment.this)
                         .navigate(R.id.action_FirstFragment_to_PostSelectionFragment);
             }
         });
