@@ -48,6 +48,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:20.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.0.2'
     implementation files('libs/spotify-app-remote-release-0.7.2.aar')
+    implementation files('libs/spotify-auth-release-1.2.3.aar')
     implementation "com.google.code.gson:gson:2.8.5"
+    implementation "com.spotify.android:auth:1.2.3"
+    implementation 'com.github.kaaes:spotify-web-api-android:0.4.1'
 
 }
