@@ -10,33 +10,22 @@
         android:name="com.example.musiclovers.MenuFragment"
         android:label="@string/Menu"
         tools:layout="@layout/fragment_menu">
-
         <action
-            android:id="@+id/action_FirstFragment_to_PostSelectionFragment"
-            app:destination="@id/PostSelectionFragment" />
+            android:id="@+id/action_MenuFragment_to_FinalizingPostFragment"
+            app:destination="@id/FinalizingPostFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/PostSelectionFragment"
         android:name="com.example.musiclovers.PostSelectionFragment"
         android:label="Post Selection"
-        tools:layout="@layout/fragment_post_selection">
-
-        <action
-            android:id="@+id/action_PostSelection_to_SpotifySelection"
-            app:destination="@id/SpotifySelectionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_post_selection"/>
 
     <fragment
         android:id="@+id/SpotifySelectionFragment"
         android:name="com.example.musiclovers.SpotifySelectionFragment"
         android:label="Spotify Selection"
-        tools:layout="@layout/fragment_spotify_selection">
-
-        <action
-            android:id="@+id/action_SpotifySelection_to_FinalizingPost"
-            app:destination="@id/FinalizingPostFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_spotify_selection"/>
 
     <fragment
         android:id="@+id/FinalizingPostFragment"

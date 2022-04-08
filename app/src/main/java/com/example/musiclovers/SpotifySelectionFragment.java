@@ -74,14 +74,14 @@ public class SpotifySelectionFragment extends Fragment{
         //Will have multiple setOnclickListeners to handle transitioning to other fragements or activities
 
         //Need to update the button so it isn't buttonFirst but maybe buttonPost
-        binding.buttonNext.setOnClickListener(new View.OnClickListener() {
+        /* binding.buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Must change the .nagigate to different fragments. needs to be a different id
                 NavHostFragment.findNavController(SpotifySelectionFragment.this)
                         .navigate(R.id.action_SpotifySelection_to_FinalizingPost);
             }
-        });
+        }); */
     }
 
     @Override
