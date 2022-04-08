@@ -15,6 +15,7 @@ import com.example.musiclovers.databinding.FragmentMenuBinding;
 public class MenuFragment extends Fragment {
 
     private FragmentMenuBinding binding;
+    private SpotifyPlayer mSpotifyPlayer;
     private String TAG = "MenuFragment";
 
     @Override
@@ -32,6 +33,7 @@ public class MenuFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
+        mSpotifyPlayer = new SpotifyPlayer(getActivity());
     }
 
     @Override
