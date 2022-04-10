@@ -27,7 +27,7 @@
         android:layout_marginTop="72dp"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        android:text="Enter your post here"
+        android:hint="Enter your post here"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_marginBottom="252dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="What would you like to post?"
+        android:hint="What would you like to post?"
         app:layout_constraintBottom_toTopOf="@+id/button_post"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -51,7 +51,7 @@
         android:layout_marginBottom="88dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Link to music"
+        android:hint="Link to music"
         app:layout_constraintBottom_toTopOf="@+id/button_post"
         app:layout_constraintStart_toStartOf="parent" />
 
