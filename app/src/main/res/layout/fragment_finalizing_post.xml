@@ -13,21 +13,22 @@
         android:id="@+id/button_post"
         android:layout_width="196dp"
         android:layout_height="53dp"
-        android:layout_marginEnd="116dp"
         android:layout_marginBottom="100dp"
         android:text="@string/submit_post"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="226dp"
         android:layout_height="42dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="72dp"
+        android:hint="Enter your post here"
+        android:textAlignment="center"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        android:hint="Enter your post here"
+        app:layout_constraintBottom_toTopOf="@+id/ThoughtsTextBox"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,12 +36,13 @@
         android:id="@+id/ThoughtsTextBox"
         android:layout_width="365dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
         android:layout_marginBottom="252dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="What would you like to post?"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/button_post"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -52,7 +54,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Link to music"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/button_post"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
