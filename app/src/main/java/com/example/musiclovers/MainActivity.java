@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,12 +12,31 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class MainActivity extends SingleFragmentActivity {
 
     /* private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding; */
     private String TAG = "MainActivity";
+
+    // Access Cloud Firestore
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // Create ListView for posts
+    ListView listView;
 
     @Override
     protected Fragment createFragment() {
@@ -26,6 +46,9 @@ public class MainActivity extends SingleFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_main);
+
+        //listView = findViewById(R.id.list_view);
         Log.d(TAG, "onCreate");
     }
 
@@ -87,4 +110,35 @@ public class MainActivity extends SingleFragmentActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    // Method to retrieve all posts from Firestore database
+    public void getPosts() {
+        db.collection("Posts")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.d(TAG, "onSuccess: Retrieving posts");
+                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot snapshot : snapshotList) {
+                            Log.d(TAG, "onSuccess: " + snapshot.getData().toString());
+                            // get username
+                            String user = snapshot.get("userID").toString();
+                            // get post contents
+                            String content = snapshot.get("text").toString();
+                            // get spotify link
+                            String link = snapshot.get("link").toString();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure: ", e);
+                    }
+                });
+
+    }
+
+
 }

@@ -34,4 +34,12 @@
         app:srcCompat="@android:drawable/ic_dialog_email"
         tools:ignore="SpeakableTextPresentCheck" />
 
+
+    <!-- Create ListView for feed of posts -->
+<!--    <ListView-->
+<!--        android:id="@+id/list_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:ignore="InvalidId" />-->
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
