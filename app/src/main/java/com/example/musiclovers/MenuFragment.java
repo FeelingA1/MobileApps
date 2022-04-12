@@ -11,12 +11,20 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.musiclovers.databinding.FragmentMenuBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class MenuFragment extends Fragment {
 
     private FragmentMenuBinding binding;
     private SpotifyPlayer mSpotifyPlayer;
     private String TAG = "MenuFragment";
+
 
     @Override
     public View onCreateView(
@@ -71,5 +79,6 @@ public class MenuFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 
 }
