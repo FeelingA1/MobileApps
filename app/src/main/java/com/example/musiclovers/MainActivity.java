@@ -35,11 +35,6 @@ public class MainActivity extends SingleFragmentActivity {
     private ActivityMainBinding binding; */
     private String TAG = "MainActivity";
 
-    // Access Cloud Firestore
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    // Create ListView for posts
-    ListView listView;
-
     @Override
     protected Fragment createFragment() {
         return new MenuFragment();
@@ -48,44 +43,6 @@ public class MainActivity extends SingleFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ArrayList<String> arrayList = new ArrayList<>();
-        listView = findViewById(R.id.list_view);
-        arrayList = generateFeed();
-
-        ArrayList<String> finalArrayList = arrayList;
-        db.collection("Posts")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d(TAG, "onSuccess: Retrieving posts");
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            String post = "";
-                            Log.d(TAG, "onSuccess: " + snapshot.getData().toString());
-                            // get username
-                            post = post + "User: " + snapshot.get("userID").toString() + "\n\n";
-                            // get post contents
-                            post = post + snapshot.get("text").toString() + "\n\n";
-                            // get spotify link
-                            post = post + "Link: " + snapshot.get("link").toString();
-                            Log.d(TAG, "POST: " + post);
-                            finalArrayList.add(post);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e);
-                    }
-                });
-
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-        listView.setAdapter(arrayAdapter);
-
         Log.d(TAG, "onCreate");
     }
 
@@ -148,47 +105,4 @@ public class MainActivity extends SingleFragmentActivity {
                 || super.onSupportNavigateUp();
     }
 
-    // Method to retrieve all posts from Firestore database
-    public void ginerateFeed() {
-        ArrayList<String> feed = new ArrayList<>();
-        db.collection("Posts")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d(TAG, "onSuccess: Retrieving posts");
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            String post = "";
-                            Log.d(TAG, "onSuccess: " + snapshot.getData().toString());
-                            // get username
-                            post = snapshot.get("userID").toString() + "\n";
-                            // get post contents
-                            post = snapshot.get("text").toString() + "\n";
-                            // get spotify link
-                            post = snapshot.get("link").toString();
-                            feed.add(post);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e);
-                    }
-                });
-    }
-
-    public ArrayList<String> generateFeed(){
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("hello");
-        arrayList.add("User: test \n\nthis song rocks \n\nLink:");
-        arrayList.add("User: test \n\ntest \n\nLink: test");
-        arrayList.add("User: test \n\nthis song bangs \n\nLink: osu.edu");
-        arrayList.add("User: test \n\nThis is a really good song\n\nLink: youtube.com");
-        arrayList.add("User: musiclover \n\nsong good \n\nLink: https://open.spotify.com/track/5UqCQaDshqbIk3pkhy4Pjg?si=febf62e52b43462a");
-        arrayList.add("User: musiclover \n\nthis bangs \n\nLink: https://open.spotify.com/track/5LxvwujISqiB8vpRYv887S?si=a1cbffe31e0b408d");
-        arrayList.add("User: test \n\ndds \n\nLink: d");
-        return arrayList;
-    }
 }
