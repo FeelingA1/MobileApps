@@ -21,25 +21,51 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MenuFragment extends Fragment {
 
     private FragmentMenuBinding binding;
     private SpotifyPlayer mSpotifyPlayer;
-    private String TAG = "MenuFragment";
+    private final String TAG = "MenuFragment";
 
     // Access Cloud Firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     // Create ListView for posts
     ListView listView;
+    // Create CopyOnWriteArrayList for concurrent collection of posts from Firebase
+    CopyOnWriteArrayList<String> feed = new CopyOnWriteArrayList<>();
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         Log.d(TAG, "onCreateView");
         binding = FragmentMenuBinding.inflate(inflater, container, false);
+
+        listView = binding.listView.findViewById(R.id.list_view);
+        // Collect the posts from Firebase and store them into the ArrayList 'feed'
+        db.collection("Posts")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Log.d(TAG, "onSuccess: Retrieving posts");
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Log.d(TAG, "onSuccess: " + Objects.requireNonNull(snapshot.getData()));
+                        // get contents of post
+                        String post = "User: " + Objects.requireNonNull(snapshot.get("userID")) + "\n\n"
+                                + Objects.requireNonNull(snapshot.get("text")) + "\n\n"
+                                + "Link: " + Objects.requireNonNull(snapshot.get("link"));
+                        feed.add(post);
+                    }
+                })
+                .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, feed);
+        listView.setAdapter(arrayAdapter);
+
         return binding.getRoot();
 
     }
@@ -72,19 +98,8 @@ public class MenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        listView = view.findViewById(R.id.list_view);
-        arrayList = generateFeed();
-        ArrayAdapter arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, arrayList);
-        listView.setAdapter(arrayAdapter);
-
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(MenuFragment.this)
-                        .navigate(R.id.action_MenuFragment_to_FinalizingPostFragment);
-            }
-        });
+        binding.buttonFirst.setOnClickListener(view1 -> NavHostFragment.findNavController(MenuFragment.this)
+                .navigate(R.id.action_MenuFragment_to_FinalizingPostFragment));
     }
 
     @Override
@@ -94,7 +109,7 @@ public class MenuFragment extends Fragment {
     }
 
     // faux generate feed just so that the feed can be populated with stuff until the real one is fixed
-    public ArrayList<String> generateFeed(){
+    public ArrayList<String> ginerateFeed(){
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("hello");
         arrayList.add("User: test \n\nthis song rocks \n\nLink:");
@@ -108,8 +123,7 @@ public class MenuFragment extends Fragment {
     }
 
     // Method to retrieve all posts from Firestore database --BROKEN
-    public void ginerateFeed() {
-        ArrayList<String> feed = new ArrayList<>();
+    public void generateFeed() {
         db.collection("Posts")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -126,7 +140,7 @@ public class MenuFragment extends Fragment {
                             post = snapshot.get("text").toString() + "\n";
                             // get spotify link
                             post = snapshot.get("link").toString();
-                            feed.add(post);
+                            //feed.add(post);
                         }
                     }
                 })
