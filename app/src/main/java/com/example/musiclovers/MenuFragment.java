@@ -13,13 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.musiclovers.databinding.FragmentMenuBinding;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -62,6 +58,9 @@ public class MenuFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+
+        Log.d(TAG, "feed population: " + feed.toString());
+        if (feed.isEmpty()) feed = generateStaticFeed();
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, feed);
         listView.setAdapter(arrayAdapter);
@@ -109,9 +108,8 @@ public class MenuFragment extends Fragment {
     }
 
     // faux generate feed just so that the feed can be populated with stuff until the real one is fixed
-    public ArrayList<String> ginerateFeed(){
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("hello");
+    public CopyOnWriteArrayList<String> generateStaticFeed(){
+        CopyOnWriteArrayList<String> arrayList = new CopyOnWriteArrayList<>();
         arrayList.add("User: test \n\nthis song rocks \n\nLink:");
         arrayList.add("User: test \n\ntest \n\nLink: test");
         arrayList.add("User: test \n\nthis song bangs \n\nLink: osu.edu");
@@ -120,36 +118,6 @@ public class MenuFragment extends Fragment {
         arrayList.add("User: musiclover \n\nthis bangs \n\nLink: https://open.spotify.com/track/5LxvwujISqiB8vpRYv887S?si=a1cbffe31e0b408d");
         arrayList.add("User: test \n\ndds \n\nLink: d");
         return arrayList;
-    }
-
-    // Method to retrieve all posts from Firestore database --BROKEN
-    public void generateFeed() {
-        db.collection("Posts")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d(TAG, "onSuccess: Retrieving posts");
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            String post = "";
-                            Log.d(TAG, "onSuccess: " + snapshot.getData().toString());
-                            // get username
-                            post = snapshot.get("userID").toString() + "\n";
-                            // get post contents
-                            post = snapshot.get("text").toString() + "\n";
-                            // get spotify link
-                            post = snapshot.get("link").toString();
-                            //feed.add(post);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e);
-                    }
-                });
     }
 
 }
