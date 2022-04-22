@@ -14,6 +14,7 @@ public class SpotifyPlayer {
     private SpotifyAppRemote mSpotifyAppRemote;
 
     public SpotifyPlayer(Context context) {
+        Log.d("SpotifyPlayer", "Entered SpotifyPlayer Constructor");
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
@@ -26,15 +27,15 @@ public class SpotifyPlayer {
                     @Override
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;
-                        Log.d("SpotifySelection", "Connected! Yay!");
+                        Log.d("SpotifyPlayer", "Connected! Yay!");
 
                         // Now you can start interacting with App Remote
-                        // connected();
+                        connected();
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
-                        Log.e("SpotifySelection", throwable.getMessage(), throwable);
+                        Log.e("SpotifyPlayer", throwable.getMessage(), throwable);
 
                         // Something went wrong when attempting to connect! Handle errors here
                     }
@@ -55,12 +56,12 @@ public class SpotifyPlayer {
                 .setEventCallback(playerState -> {
                     final Track track = playerState.track;
                     if (track != null) {
-                        Log.d("SpotifySelection", track.name + " by " + track.artist.name);
+                        Log.d("SpotifyPlayer", track.name + " by " + track.artist.name);
                     }
                 });
     }
 
-    /* private void connected() {
+    private void connected() {
         // Play a playlist
         mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
 
@@ -70,8 +71,8 @@ public class SpotifyPlayer {
                 .setEventCallback(playerState -> {
                     final Track track = playerState.track;
                     if (track != null) {
-                        Log.d("SpotifySelection", track.name + " by " + track.artist.name);
+                        Log.d("SpotifyPlayer", track.name + " by " + track.artist.name);
                     }
                 });
-    } */
+    }
 }

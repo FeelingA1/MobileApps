@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.musiclovers.databinding.FragmentFinalizingPostBinding;
-import com.example.musiclovers.databinding.FragmentSpotifySelectionBinding;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
