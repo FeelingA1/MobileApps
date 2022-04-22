@@ -57,13 +57,13 @@ public class PostSelectionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Will have multiple setOnclickListeners to handle transitioning to other fragements or activities
+        //Will have multiple setOnclickListeners to handle transitioning to other fragments or activities
 
         //Need to update the button so it isn't buttonFirst but maybe buttonPost
         /* binding.buttonText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Must change the .nagigate to different fragments
+                //Must change the .navigate to different fragments
                 NavHostFragment.findNavController(PostSelectionFragment.this)
                         .navigate(R.id.action_PostSelection_to_SpotifySelection);
             }
@@ -73,7 +73,7 @@ public class PostSelectionFragment extends Fragment {
         binding.buttonAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Must change the .nagigate to different fragments
+                //Must change the .navigate to different fragments
                 NavHostFragment.findNavController(PostSelectionFragment.this)
                         .navigate(R.id.action_PostSelection_to_SpotifySelection);
             }
