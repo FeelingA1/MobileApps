@@ -16,18 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/PostSelectionFragment"
-        android:name="com.example.musiclovers.PostSelectionFragment"
-        android:label="Post Selection"
-        tools:layout="@layout/fragment_post_selection"/>
-
-    <fragment
-        android:id="@+id/SpotifySelectionFragment"
-        android:name="com.example.musiclovers.SpotifySelectionFragment"
-        android:label="Spotify Selection"
-        tools:layout="@layout/fragment_spotify_selection"/>
-
-    <fragment
         android:id="@+id/FinalizingPostFragment"
         android:name="com.example.musiclovers.FinalizingPostFragment"
         android:label="Finalizing Post"
