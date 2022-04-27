@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundcolor"
     tools:context=".MenuFragment"
 
     >
@@ -13,16 +14,30 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="566dp"
+        android:textColor="@color/textcolor"
         app:layout_constraintBottom_toTopOf="@+id/button_first"
         tools:ignore="MissingConstraints" />
 
 
     <Button
+        android:id="@+id/toggleButton"
+        android:layout_width="318dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="4dp"
+        android:text="Night/Day Mode"
+        android:textColor="@color/textcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/button_first"
         android:layout_width="318dp"
-        android:layout_height="57dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="50dp"
         android:text="@string/Post"
+        android:textColor="@color/textcolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
