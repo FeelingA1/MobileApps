@@ -1,16 +1,18 @@
 package com.example.musiclovers;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -26,6 +28,7 @@ public class MenuFragment extends Fragment {
 
     private FragmentMenuBinding binding;
     private SpotifyPlayer mSpotifyPlayer;
+    private Button darkToggleBtn;
     private final String TAG = "MenuFragment";
 
     // Access Cloud Firestore
@@ -42,21 +45,7 @@ public class MenuFragment extends Fragment {
         super.onCreate(bundle);
 
         // Collect the posts from Firebase and store them into the ArrayList 'feed'
-        db.collection("Posts")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    Log.d(TAG, "onSuccess: Retrieving posts");
-                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot snapshot : snapshotList) {
-                        Log.d(TAG, "onSuccess: " + Objects.requireNonNull(snapshot.getData()));
-                        // get contents of post
-                        String post = "User: " + Objects.requireNonNull(snapshot.get("userID")) + "\n\n"
-                                + Objects.requireNonNull(snapshot.get("text")) + "\n\n"
-                                + "Link: " + Objects.requireNonNull(snapshot.get("link"));
-                        feed.add(post);
-                    }
-                })
-                .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+        getPosts();
     }
 
     @Override
@@ -108,7 +97,7 @@ public class MenuFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setDarkModeButton();
         binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -123,6 +112,53 @@ public class MenuFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void setDarkModeButton() {
+        darkToggleBtn = (Button) getView().findViewById(R.id.toggleButton);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", getActivity().MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean darkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if(darkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            darkToggleBtn.setText("Day Mode");
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            darkToggleBtn.setText("Dark Mode");
+        }
+        darkToggleBtn.setOnClickListener(
+                view -> {
+                    if(darkModeOn) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        editor.putBoolean("isDarkModeOn", false);
+                        editor.apply();
+                        darkToggleBtn.setText("Dark Mode");
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        editor.putBoolean("isDarkModeOn", true);
+                        editor.apply();
+                        darkToggleBtn.setText("Day Mode");
+                    }
+                }
+        );
+    }
+
+    public void getPosts() {
+        db.collection("Posts")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Log.d(TAG, "onSuccess: Retrieving posts");
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Log.d(TAG, "onSuccess: " + Objects.requireNonNull(snapshot.getData()));
+                        // get contents of post
+                        String post = "User: " + Objects.requireNonNull(snapshot.get("userID")) + "\n\n"
+                                + Objects.requireNonNull(snapshot.get("text")) + "\n\n"
+                                + "Link: " + Objects.requireNonNull(snapshot.get("link"));
+                        feed.add(post);
+                    }
+                })
+                .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
     }
 
     // faux generate feed just so that the feed can be populated with stuff until the real one is fixed

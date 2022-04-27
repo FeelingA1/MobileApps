@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout-land/fragment_menu.xml" value="0.30687830687830686" />
         <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/activity_main.xml" value="0.271286231884058" />
+        <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
         <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/content_main.xml" value="0.271286231884058" />
         <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/fragment_finalizing_post.xml" value="0.3140625" />
         <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/fragment_first.xml" value="0.271286231884058" />
+        <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/fragment_menu.xml" value="0.3625" />
         <entry key="..\:/Users/Drexel/AndroidStudioProjects/MusicLovers/app/src/main/res/layout/fragment_second.xml" value="0.271286231884058" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/MobileApps/app/src/main/res/layout/activity_finalizing_post.xml" value="0.264" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/MobileApps/app/src/main/res/layout/activity_main.xml" value="0.176" />
@@ -25,10 +28,7 @@
         <entry key="..\:/Users/Owner/AndroidStudioProjects/MobileApps/app/src/main/res/layout/fragment_spotify_selection_horizontal.xml" value="0.1" />
         <entry key="..\:/Users/Owner/AndroidStudioProjects/MobileApps/app/src/main/res/menu/menu_main.xml" value="0.264" />
         <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/drawable/splashscreen.xml" value="0.168" />
-        <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout-land/fragment_finalizing_post.xml" value="0.5026041666666666" />
-        <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout-land/fragment_menu.xml" value="0.5026041666666666" />
         <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_main_horizontal.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout/content_main.xml" value="0.13697916666666668" />
         <entry key="..\:/Users/rdl13/AndroidStudioProjects/MobileApp/app/src/main/res/layout/fragment_finalizing_post.xml" value="0.264" />
