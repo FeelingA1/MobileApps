@@ -3,8 +3,10 @@ package com.example.musiclovers;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -32,16 +34,13 @@ public class MenuFragment extends Fragment {
     ListView listView;
     // Create CopyOnWriteArrayList for concurrent collection of posts from Firebase
     CopyOnWriteArrayList<String> feed = new CopyOnWriteArrayList<>();
+    // Adapter for ListView
+    ArrayAdapter arrayAdapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        Log.d(TAG, "onCreateView");
-        binding = FragmentMenuBinding.inflate(inflater, container, false);
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
 
-        listView = binding.listView.findViewById(R.id.list_view);
         // Collect the posts from Firebase and store them into the ArrayList 'feed'
         db.collection("Posts")
                 .get()
@@ -58,11 +57,24 @@ public class MenuFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "onFailure: ", e));
+    }
+
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        Log.d(TAG, "onCreateView");
+        binding = FragmentMenuBinding.inflate(inflater, container, false);
+
+        listView = binding.listView.findViewById(R.id.list_view);
+
+        arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, feed);
 
         Log.d(TAG, "feed population: " + feed.toString());
         if (feed.isEmpty()) feed = generateStaticFeed();
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, feed);
+        arrayAdapter = new ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, feed);
         listView.setAdapter(arrayAdapter);
 
         return binding.getRoot();
@@ -97,6 +109,12 @@ public class MenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
         binding.buttonFirst.setOnClickListener(view1 -> NavHostFragment.findNavController(MenuFragment.this)
                 .navigate(R.id.action_MenuFragment_to_FinalizingPostFragment));
     }
@@ -117,6 +135,7 @@ public class MenuFragment extends Fragment {
         arrayList.add("User: musiclover \n\nsong good \n\nLink: https://open.spotify.com/track/5UqCQaDshqbIk3pkhy4Pjg?si=febf62e52b43462a");
         arrayList.add("User: musiclover \n\nthis bangs \n\nLink: https://open.spotify.com/track/5LxvwujISqiB8vpRYv887S?si=a1cbffe31e0b408d");
         arrayList.add("User: test \n\ndds \n\nLink: d");
+        arrayAdapter.notifyDataSetChanged();
         return arrayList;
     }
 
